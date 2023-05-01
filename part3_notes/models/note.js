@@ -3,16 +3,16 @@ const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 
 const url = process.env.MONGODB_URI;
-console.log("--------------------");
-console.log(`connecting to ${url}`);
-console.log("--------------------");
+console.log("---");
+console.log(`connecting to MongoDB${url.slice(37, 50)}`);
+console.log("---");
 
 mongoose
   .connect(url)
   .then((result) => {
-    console.log("--------------------");
-    console.log("connected to MongoDB");
-    console.log("--------------------");
+    console.log("---");
+    console.log("connected");
+    console.log("---");
   })
   .catch((error) => {
     console.log(`error conneting to MongoDB: ${error.message}`);
