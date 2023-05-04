@@ -1,38 +1,21 @@
-const mongoose = require("mongoose");
-
-mongoose.set("strictQuery", false);
-
-const url = process.env.MONGODB_URI;
-console.log("---");
-console.log(`connecting to MongoDB${url.slice(37, 50)}`);
-console.log("---");
-
-mongoose
-  .connect(url)
-  .then((result) => {
-    console.log("---");
-    console.log("connected");
-    console.log("---");
-  })
-  .catch((error) => {
-    console.log(`error conneting to MongoDB: ${error.message}`);
-  });
+const { ReturnDocument } = require('mongodb');
+const mongoose = require('mongoose');
 
 const noteSchema = new mongoose.Schema({
   content: {
     type: String,
-    minLength: 5,
     required: true,
+    minLength: 5,
   },
   important: Boolean,
 });
 
-noteSchema.set("toJSON", {
+noteSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = String(returnedObject._id);
+    returnedObject.id === String(returnedObject._id);
     delete returnedObject._id;
     delete returnedObject.__v;
   },
 });
 
-module.exports = mongoose.model("Note", noteSchema);
+module.exports = mongoose.model('Note', noteSchema);
