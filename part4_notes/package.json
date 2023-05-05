@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose",
     "build:ui": "rm -rf dist && cd ../part2_notes && npm run build && cp -r dist ../part4_notes",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
   },
@@ -21,5 +21,8 @@
   "devDependencies": {
     "eslint": "^8.39.0",
     "nodemon": "^2.0.22"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
