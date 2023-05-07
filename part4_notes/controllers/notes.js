@@ -1,10 +1,9 @@
 const notesRouter = require('express').Router();
 const Note = require('../models/note');
 
-notesRouter.get('/', (request, response) => {
-  Note.find({}).then((notes) => {
-    response.json(notes);
-  });
+notesRouter.get('/', async (request, response) => {
+  const notes = await Note.find({});
+  response.json(notes);
 });
 
 notesRouter.get('/:id', (request, response, next) => {
@@ -47,7 +46,7 @@ notesRouter.put('/:id', (request, response, next) => {
     important: body.important,
   };
 
-  Note.findByIdAndUpdate(params.request.id, note, { new: true })
+  Note.findByIdAndUpdate(request.params.id, note, { new: true })
     .then((updatedNote) => {
       response.json(updatedNote);
     })
