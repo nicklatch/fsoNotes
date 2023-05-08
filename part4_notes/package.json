@@ -9,7 +9,7 @@
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
     "build:ui": "rm -rf dist && cd ../part2_notes && npm run build && cp -r dist ../part4_notes",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
-    "lint": "eslint"
+    "lint": "eslint ."
   },
   "author": "Nick Latcham",
   "license": "MIT",
