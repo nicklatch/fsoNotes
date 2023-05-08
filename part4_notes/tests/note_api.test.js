@@ -7,10 +7,10 @@ const Note = require('../models/note');
 
 beforeEach(async () => {
   await Note.deleteMany({});
-  let noteObject = new Note(helper.initialNotes[0]);
-  await noteObject.save();
-  noteObject = new Note(helper.initialNotes[1]);
-  await noteObject.save();
+  for (let note of helper.initialNotes) {
+    let noteObject = new Note(note);
+    await noteObject.save();
+  }
 });
 
 test('notes are returned as JSON', async () => {
@@ -65,7 +65,7 @@ test('a specific note can be viewed', async () => {
 
   const noteToView = notesAtStart[0];
 
-  const resultNote = await api //TODO: fiqure out why 400 status
+  const resultNote = await api
     .get(`/api/notes/${noteToView.id}`)
     .expect(200)
     .expect('Content-Type', /application\/json/);
