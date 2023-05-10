@@ -11,7 +11,7 @@ const initialNotes = [
   },
 ];
 
-const nonExisitingId = async () => {
+const nonExistingId = async () => {
   const note = new Note({
     content: 'willremovethissoon"',
   });
@@ -28,6 +28,6 @@ const notesInDb = async () => {
 
 module.exports = {
   initialNotes,
-  nonExisitingId,
+  nonExistingId,
   notesInDb,
 };
