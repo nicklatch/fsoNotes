@@ -6,12 +6,12 @@ const api = supertest(app);
 
 const Note = require('../models/note');
 
-describe('when there is initially some notes saved', () => {
-  beforeEach(async () => {
-    await Note.deleteMany({});
-    await Note.insertMany(helper.initialNotes);
-  });
+beforeEach(async () => {
+  await Note.deleteMany({});
+  await Note.insertMany(helper.initialNotes);
+});
 
+describe('when there is initially some notes saved', () => {
   test('notes are returned as json', async () => {
     await api
       .get('/api/notes')
@@ -98,15 +98,12 @@ describe('when there is initially some notes saved', () => {
     test('succeeds with status code 204 if id is valid', async () => {
       const notesAtStart = await helper.notesInDb();
       const noteToDelete = notesAtStart[0];
-
       await api.delete(`/api/notes/${noteToDelete.id}`).expect(204);
 
       const notesAtEnd = await helper.notesInDb();
-
       expect(notesAtEnd).toHaveLength(helper.initialNotes.length - 1);
 
       const contents = notesAtEnd.map((r) => r.content);
-
       expect(contents).not.toContain(noteToDelete.content);
     });
   });
