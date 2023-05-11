@@ -67,6 +67,8 @@ describe('when there is initially some notes saved', () => {
         content: 'async/await simplifies making async calls',
         important: true,
       };
+      console.log('succeeds with valid data');
+      console.log(newNote);
 
       await api
         .post('/api/notes')
@@ -76,15 +78,17 @@ describe('when there is initially some notes saved', () => {
 
       const notesAtEnd = await helper.notesInDb();
       expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1);
-
+      console.log(notesAtEnd);
       const contents = notesAtEnd.map((n) => n.content);
       expect(contents).toContain('async/await simplifies making async calls');
+      console.log(contents);
     });
 
     test('fails with status code 400 if data invalid', async () => {
       const newNote = {
         important: true,
       };
+      console.log('fails with status');
 
       await api.post('/api/notes').send(newNote).expect(400);
 
