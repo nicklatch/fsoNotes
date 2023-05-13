@@ -1,7 +1,7 @@
 const Footer = () => {
   const footerStlye = {
-    color: "green",
-    fontStyle: "italic",
+    color: 'green',
+    fontStyle: 'italic',
     fontSize: 16,
   };
 
@@ -9,7 +9,7 @@ const Footer = () => {
     <div style={footerStlye}>
       <br />
       <em>
-        Note app, Department of Computer Science, University of Helsinki 2022
+        Note app, Department of Computer Science, University of Helsinki 2023
       </em>
     </div>
   );
