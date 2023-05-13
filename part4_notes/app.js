@@ -1,3 +1,4 @@
+require('dotenv').config;
 require('express-async-errors');
 const config = require('./utils/config');
 const middleware = require('./utils/middleware');
