@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import loginService from '../services/login';
+import noteService from '../services/notes';
 
 const LoginForm = ({ setErrorMessage, setUser }) => {
   const [username, setUsername] = useState('');
@@ -9,11 +10,11 @@ const LoginForm = ({ setErrorMessage, setUser }) => {
     event.preventDefault();
     try {
       const user = await loginService.login({ username, password });
-      setUser(await user);
+      noteService.setToken(user.token);
+      setUser(user);
       setUsername('');
       setPassword('');
     } catch (exception) {
-      console.log(exception);
       setErrorMessage('Invalid Username or Password');
       setTimeout(() => {
         setErrorMessage(null);

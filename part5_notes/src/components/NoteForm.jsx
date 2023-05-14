@@ -1,6 +1,6 @@
 import noteService from '../services/notes';
 
-const NoteForm = ({ newNote, setNewNote, user }) => {
+const NoteForm = ({ newNote, setNewNote, user, notes, setNotes }) => {
   const addNote = (event) => {
     event.preventDefault();
     const noteObject = {

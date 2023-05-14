@@ -27,7 +27,13 @@ const App = () => {
       {user === null ? (
         <LoginForm setErrorMessage={setErrorMessage} setUser={setUser} />
       ) : (
-        <NoteForm newNote={newNote} setNewNote={setNewNote} user={user} />
+        <NoteForm
+          newNote={newNote}
+          setNewNote={setNewNote}
+          user={user}
+          notes={notes}
+          setNotes={setNotes}
+        />
       )}
       <ShowAllToggle showAll={showAll} setShowAll={setShowAll} />
       <NoteList
