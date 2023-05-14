@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import loginService from '../services/login';
 import noteService from '../services/notes';
 
@@ -10,6 +10,7 @@ const LoginForm = ({ setErrorMessage, setUser }) => {
     event.preventDefault();
     try {
       const user = await loginService.login({ username, password });
+      window.localStorage.setItem('loggedNoteAppUser', JSON.stringify(user));
       noteService.setToken(user.token);
       setUser(user);
       setUsername('');
@@ -21,6 +22,15 @@ const LoginForm = ({ setErrorMessage, setUser }) => {
       }, 5000);
     }
   };
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+      noteService.setToken(user.token);
+    }
+  }, []);
 
   return (
     <form onSubmit={handleLogin}>
