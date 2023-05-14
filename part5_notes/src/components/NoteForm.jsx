@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import noteService from '../services/notes';
 
-const NoteForm = ({ newNote, setNewNote, user, notes, setNotes }) => {
+const NoteForm = ({ user, notes, setNotes }) => {
+  const [newNote, setNewNote] = useState('');
+
   const addNote = (event) => {
     event.preventDefault();
     const noteObject = {

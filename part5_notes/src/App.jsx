@@ -9,7 +9,6 @@ import ShowAllToggle from './components/ShowAllToggle';
 
 const App = () => {
   const [notes, setNotes] = useState([]);
-  const [newNote, setNewNote] = useState('');
   const [showAll, setShowAll] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const [user, setUser] = useState(null);
@@ -27,13 +26,7 @@ const App = () => {
       {user === null ? (
         <LoginForm setErrorMessage={setErrorMessage} setUser={setUser} />
       ) : (
-        <NoteForm
-          newNote={newNote}
-          setNewNote={setNewNote}
-          user={user}
-          notes={notes}
-          setNotes={setNotes}
-        />
+        <NoteForm user={user} notes={notes} setNotes={setNotes} />
       )}
       <ShowAllToggle showAll={showAll} setShowAll={setShowAll} />
       <NoteList
