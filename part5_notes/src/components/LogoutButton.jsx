@@ -1,7 +1,7 @@
-const LogoutButton = () => {
+const LogoutButton = ({ setUser }) => {
   const handleLogout = (event) => {
     window.localStorage.clear();
-    window.location.reload();
+    setUser(null);
   };
   if (window.localStorage.getItem('loggedNoteAppUser')) {
     return <button onClick={handleLogout}>logout</button>;

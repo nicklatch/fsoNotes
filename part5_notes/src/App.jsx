@@ -6,6 +6,7 @@ import NoteList from './components/NotesList';
 import Notification from './components/Notification';
 import Footer from './components/Footer';
 import ShowAllToggle from './components/ShowAllToggle';
+import Togglable from './components/Toggleable';
 
 const App = () => {
   const [notes, setNotes] = useState([]);
@@ -24,9 +25,16 @@ const App = () => {
       <h1>Notes</h1>
       <Notification message={errorMessage} />
       {user === null ? (
-        <LoginForm setErrorMessage={setErrorMessage} setUser={setUser} />
+        <Togglable buttonLabel='login'>
+          <LoginForm setErrorMessage={setErrorMessage} setUser={setUser} />
+        </Togglable>
       ) : (
-        <NoteForm user={user} notes={notes} setNotes={setNotes} />
+        <NoteForm
+          user={user}
+          setUser={setUser}
+          notes={notes}
+          setNotes={setNotes}
+        />
       )}
       <ShowAllToggle showAll={showAll} setShowAll={setShowAll} />
       <NoteList
