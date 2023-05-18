@@ -2,7 +2,7 @@ const ShowAllToggle = ({ showAll, setShowAll }) => {
   return (
     <div>
       <button onClick={() => setShowAll(!showAll)}>
-        show {showAll ? 'important' : 'all'}
+        Show {showAll ? 'Important' : 'All'}
       </button>
     </div>
   );

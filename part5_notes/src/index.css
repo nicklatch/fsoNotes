@@ -1,3 +1,9 @@
+:root {
+  max-width: 100vh;
+  min-height: 100vw;
+  padding: 0 4px;
+}
+
 h1 {
   color: green;
   font-style: italic;
