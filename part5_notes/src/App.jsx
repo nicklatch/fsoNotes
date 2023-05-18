@@ -15,6 +15,13 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [user, setUser] = useState(null);
 
+  const addNote = (noteObject) => {
+    noteService.create(noteObject).then((returnedNote) => {
+      setNotes(notes.concat(returnedNote));
+      setNewNote('');
+    });
+  };
+
   useEffect(() => {
     noteService.getAll().then((initialNotes) => {
       setNotes(initialNotes);
@@ -30,10 +37,12 @@ const App = () => {
           <LoginForm setErrorMessage={setErrorMessage} setUser={setUser} />
         </Togglable>
       ) : (
-        <Togglable buttonLabel='New Note'>
+        <>
           <LogoutButton setUser={setUser} />
-          <NoteForm notes={notes} setNotes={setNotes} />
-        </Togglable>
+          <Togglable buttonLabel='New Note'>
+            <NoteForm createNote={addNote} />
+          </Togglable>
+        </>
       )}
       <ShowAllToggle showAll={showAll} setShowAll={setShowAll} />
       <NoteList
