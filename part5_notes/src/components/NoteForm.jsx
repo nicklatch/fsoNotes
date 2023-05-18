@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import noteService from '../services/notes';
-import LogoutButton from './LogoutButton';
 
-const NoteForm = ({ user, notes, setNotes, setUser }) => {
+const NoteForm = ({ notes, setNotes }) => {
   const [newNote, setNewNote] = useState('');
 
   const addNote = (event) => {
@@ -23,12 +22,10 @@ const NoteForm = ({ user, notes, setNotes, setUser }) => {
 
   return (
     <>
-      <p>
-        {user.name} <LogoutButton setUser={setUser} />
-      </p>
+      <h2>Create a New Note</h2>
       <form onSubmit={addNote}>
         <input value={newNote} onChange={handleNoteChange} />
-        <button type='submit'>save</button>
+        <button type='submit'>Save</button>
       </form>
     </>
   );
