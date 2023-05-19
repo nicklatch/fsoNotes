@@ -15,6 +15,8 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [user, setUser] = useState(null);
 
+  const noteFormRef = useRef();
+
   const addNote = (noteObject) => {
     noteFormRef.current.toggleVisibility();
     noteService.create(noteObject).then((returnedNote) => {
@@ -22,8 +24,6 @@ const App = () => {
       setNewNote('');
     });
   };
-
-  const noteFormRef = useRef();
 
   useEffect(() => {
     noteService.getAll().then((initialNotes) => {
