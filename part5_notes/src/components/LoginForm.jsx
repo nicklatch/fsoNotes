@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import loginService from '../services/login';
 import noteService from '../services/notes';
+import PropTypes from 'prop-types';
 
 const LoginForm = ({ setErrorMessage, setUser }) => {
   const [username, setUsername] = useState('');
@@ -58,6 +59,12 @@ const LoginForm = ({ setErrorMessage, setUser }) => {
       </form>
     </div>
   );
+};
+
+LoginForm.propTypes = {
+  handleLogin: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
 };
 
 export default LoginForm;
