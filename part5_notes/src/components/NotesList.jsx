@@ -1,5 +1,6 @@
 import Note from './Note';
 import noteService from '../services/notes';
+import PropTypes from 'prop-types';
 
 const NotesList = ({ notes, showAll, setErrorMessage, setNotes }) => {
   const notesToShow = showAll ? notes : notes.filter((note) => note.important);
@@ -15,7 +16,7 @@ const NotesList = ({ notes, showAll, setErrorMessage, setNotes }) => {
       })
       .catch((error) => {
         setErrorMessage(
-          `Note '${note.content}' was already removed from server`
+          `Error: ${error}Note | '${note.content}' was already removed from server`
         );
         setTimeout(() => {
           setErrorMessage(null);
@@ -37,6 +38,13 @@ const NotesList = ({ notes, showAll, setErrorMessage, setNotes }) => {
       </ul>
     </div>
   );
+};
+
+NotesList.propTypes = {
+  notes: PropTypes.array.isRequired,
+  showAll: PropTypes.bool.isRequired,
+  setErrorMessage: PropTypes.func.isRequired,
+  setNotes: PropTypes.func.isRequired,
 };
 
 export default NotesList;

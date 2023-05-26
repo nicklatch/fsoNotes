@@ -1,8 +1,10 @@
+import PropTypes from 'prop-types';
+
 const LogoutButton = ({ setUser }) => {
   const currentUser = JSON.parse(
     window.localStorage.getItem('loggedNoteAppUser')
   );
-  const handleLogout = (event) => {
+  const handleLogout = () => {
     window.localStorage.clear();
     setUser(null);
   };
@@ -14,4 +16,9 @@ const LogoutButton = ({ setUser }) => {
     );
   }
 };
+
+LogoutButton.propTypes = {
+  setUser: PropTypes.func.isRequired,
+};
+
 export default LogoutButton;

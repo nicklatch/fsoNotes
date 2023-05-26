@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import PropTypes from 'prop-types';
 
 const NoteForm = ({ createNote }) => {
   const [newNote, setNewNote] = useState('');
@@ -25,6 +25,10 @@ const NoteForm = ({ createNote }) => {
       </form>
     </>
   );
+};
+
+NoteForm.propTypes = {
+  createNote: PropTypes.func.isRequired,
 };
 
 export default NoteForm;

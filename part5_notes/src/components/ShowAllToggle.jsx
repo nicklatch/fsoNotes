@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const ShowAllToggle = ({ showAll, setShowAll }) => {
   return (
     <div>
@@ -6,6 +8,11 @@ const ShowAllToggle = ({ showAll, setShowAll }) => {
       </button>
     </div>
   );
+};
+
+ShowAllToggle.propTypes = {
+  showAll: PropTypes.bool.isRequired,
+  setShowAll: PropTypes.func.isRequired,
 };
 
 export default ShowAllToggle;

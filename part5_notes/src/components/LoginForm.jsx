@@ -65,6 +65,9 @@ LoginForm.propTypes = {
   handleLogin: PropTypes.func.isRequired,
   username: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
+  setErrorMessage: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
 };
+//prop-types for LoginForm
 
 export default LoginForm;
