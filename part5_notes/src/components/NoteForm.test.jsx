@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import NoteForm from './NoteForm';
 import userEvent from '@testing-library/user-event';
-import { expect, vi } from 'vitest';
+import { vi } from 'vitest';
 
 test('<NoteForm /> updates parent state and calls onSubmit', async () => {
   const createNote = vi.fn();

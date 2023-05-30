@@ -40,6 +40,7 @@ const LoginForm = ({ setErrorMessage, setUser }) => {
         <div>
           username:
           <input
+            id='username'
             type='text'
             value={username}
             name='Username'
@@ -49,25 +50,27 @@ const LoginForm = ({ setErrorMessage, setUser }) => {
         <div>
           password
           <input
+            id='password'
             type='text'
             value={password}
             name='Password'
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type='submit'>login</button>
+        <button id='login-button' type='submit'>
+          login
+        </button>
       </form>
     </div>
   );
 };
 
 LoginForm.propTypes = {
-  handleLogin: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  setErrorMessage: PropTypes.func.isRequired,
-  setUser: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func,
+  username: PropTypes.string,
+  password: PropTypes.string,
+  setErrorMessage: PropTypes.func,
+  setUser: PropTypes.func,
 };
-//prop-types for LoginForm
 
 export default LoginForm;
