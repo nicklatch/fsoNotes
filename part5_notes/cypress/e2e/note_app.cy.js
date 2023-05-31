@@ -21,4 +21,20 @@ describe('Note app', function () {
     cy.get('#login-button').click();
     cy.contains('Nick Latcham');
   });
+
+  describe('when logged in', function () {
+    beforeEach(function () {
+      cy.contains(/Login/i).click();
+      cy.get('input:first').type('nick');
+      cy.get('input:last').type('nick');
+      cy.get('#login-button').click();
+    });
+
+    it('a new note can be created', function () {
+      cy.contains(/new note/i).click();
+      cy.get('input').type('a note created by cypress');
+      cy.contains(/save/i).click();
+      cy.contains('a note created by cypress');
+    });
+  });
 });
