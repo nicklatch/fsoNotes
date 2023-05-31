@@ -13,7 +13,7 @@ const App = () => {
   const noteFormRef = useRef();
   const [notes, setNotes] = useState([]);
   const [showAll, setShowAll] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const App = () => {
   return (
     <>
       <h1>Notes</h1>
-      <Notification message={errorMessage} />
+      {errorMessage && <Notification message={errorMessage} />}
       {user === null ? (
         <Togglable buttonLabel="Login">
           <LoginForm setErrorMessage={setErrorMessage} setUser={setUser} />
@@ -40,7 +40,7 @@ const App = () => {
       ) : (
         <>
           <LogoutButton setUser={setUser} />
-          <Togglable buttonLabel="New Note" refs={noteFormRef}>
+          <Togglable buttonLabel="New Note" ref={noteFormRef}>
             <NoteForm createNote={addNote} />
           </Togglable>
         </>

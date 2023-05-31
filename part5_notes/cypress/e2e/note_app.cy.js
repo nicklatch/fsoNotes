@@ -29,6 +29,20 @@ describe('Note app', function () {
     cy.contains('Nick Latcham');
   });
 
+  it('login fails with wrong password', function() {
+    cy.contains(/login/i).click();
+    cy.get('#username').type('nick');
+    cy.get('#password').type('wrong');
+    cy.get('#login-button').click();
+
+    cy.get('.error')
+      .should('contain', 'Invalid Username or Password')
+      .and('have.css', 'color', 'rgb(255, 0, 0)')
+      .and('have.css', 'border-style', 'solid')
+
+    cy.get('html').should('not.contain', 'Nick Latcham')
+  })
+
   describe('when logged in', function () {
     beforeEach(function () {
       cy.contains(/Login/i).click();
@@ -43,5 +57,18 @@ describe('Note app', function () {
       cy.contains(/save/i).click();
       cy.contains('a note created by cypress');
     });
+
+    describe('and a note exists', function () {
+      beforeEach(function () {
+        cy.contains(/new note/i).click();
+        cy.get('input').type('another note cypress');
+        cy.contains(/save/i).click();
+      })
+
+      it('it can be made not important', function() {
+        cy.contains('another note cypress').contains(/make not important/i).click();
+        cy.contains('another note cypress').contains(/make important/i);
+      })
+    })
   });
 });
