@@ -40,25 +40,25 @@ const LoginForm = ({ setErrorMessage, setUser }) => {
         <div>
           username:
           <input
-            id='username'
-            type='text'
+            id="username"
+            type="text"
             value={username}
-            name='Username'
+            name="Username"
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
         <div>
           password
           <input
-            id='password'
-            type='text'
+            id="password"
+            type="text"
             value={password}
-            name='Password'
+            name="Password"
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button id='login-button' type='submit'>
-          login
+        <button id="login-button" type="submit">
+          Login
         </button>
       </form>
     </div>

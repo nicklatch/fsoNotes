@@ -34,13 +34,13 @@ const App = () => {
       <h1>Notes</h1>
       <Notification message={errorMessage} />
       {user === null ? (
-        <Togglable buttonLabel='Login'>
+        <Togglable buttonLabel="Login">
           <LoginForm setErrorMessage={setErrorMessage} setUser={setUser} />
         </Togglable>
       ) : (
         <>
           <LogoutButton setUser={setUser} />
-          <Togglable buttonLabel='New Note' refs={noteFormRef}>
+          <Togglable buttonLabel="New Note" refs={noteFormRef}>
             <NoteForm createNote={addNote} />
           </Togglable>
         </>
