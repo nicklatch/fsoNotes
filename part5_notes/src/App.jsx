@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import noteService from './services/notes';
 import LoginForm from './components/LoginForm';
 import NoteForm from './components/NoteForm';
@@ -10,25 +10,24 @@ import Togglable from './components/Toggleable';
 import LogoutButton from './components/LogoutButton';
 
 const App = () => {
+  const noteFormRef = useRef();
   const [notes, setNotes] = useState([]);
   const [showAll, setShowAll] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const [user, setUser] = useState(null);
-
-  const noteFormRef = useRef();
-
-  const addNote = (noteObject) => {
-    noteFormRef.current.toggleVisibility();
-    noteService.create(noteObject).then((returnedNote) => {
-      setNotes(notes.concat(returnedNote));
-    });
-  };
 
   useEffect(() => {
     noteService.getAll().then((initialNotes) => {
       setNotes(initialNotes);
     });
   }, []);
+
+  const addNote = (noteObject) => {
+    noteService.create(noteObject).then((returnedNote) => {
+      setNotes(notes.concat(returnedNote));
+      noteFormRef.current.toggleVisibility();
+    });
+  };
 
   return (
     <>
