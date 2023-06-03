@@ -1,16 +1,8 @@
-const isNotTest = process.env.NODE_ENV !== 'test';
+const info = (...params) => console.log(...params);
 
-const info = (...params) => {
-  if (isNotTest) {
-    console.log(...params);
-  }
-};
 
-const error = (...params) => {
-  if (isNotTest) {
-    console.error(...params);
-  }
-};
+const error = (...params) => console.error(...params);
+
 
 module.exports = {
   error,

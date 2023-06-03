@@ -7,6 +7,15 @@ const LoginForm = ({ setErrorMessage, setUser }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+      noteService.setToken(user.token);
+    }
+  }, []);
+
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
@@ -23,15 +32,6 @@ const LoginForm = ({ setErrorMessage, setUser }) => {
       }, 5000);
     }
   };
-
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedNoteAppUser');
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
-      noteService.setToken(user.token);
-    }
-  }, []);
 
   return (
     <div>
