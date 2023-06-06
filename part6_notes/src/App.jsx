@@ -21,6 +21,13 @@ store.dispatch({
   },
 });
 
+store.dispatch({
+  type: 'TOGGLE_IMPORTANCE',
+  payload: {
+    id: 2,
+  },
+});
+
 function App() {
   return (
     <div>
