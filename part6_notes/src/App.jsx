@@ -1,45 +1,29 @@
-import { createStore } from 'redux';
-import noteReducer from './reducers/noteReducer';
+import { createNote, toggleImportanceOf } from './reducers/noteReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import NewNote from './NewNote';
+import Notes from './Notes';
 
-const store = createStore(noteReducer);
+const App = () => {
+  const dispatch = useDispatch();
+  const notes = useSelector((state) => state);
 
-store.dispatch({
-  type: 'NEW_NOTE',
-  payload: {
-    content: 'the app state is in redux store',
-    important: true,
-    id: 1,
-  },
-});
+  const addNote = (event) => {
+    event.preventDefault();
+    const content = event.target.note.value;
+    event.target.note.value = '';
+    dispatch(createNote(content));
+  };
 
-store.dispatch({
-  type: 'NEW_NOTE',
-  payload: {
-    content: 'state changes are made with actions',
-    important: false,
-    id: 2,
-  },
-});
+  const toggleImportance = (id) => {
+    dispatch(toggleImportanceOf(id));
+  };
 
-store.dispatch({
-  type: 'TOGGLE_IMPORTANCE',
-  payload: {
-    id: 2,
-  },
-});
-
-function App() {
   return (
     <div>
-      <ul>
-        {store.getState().map((note) => (
-          <li key={note.id}>
-            {note.content} <strong>{note.important ? 'important' : ''}</strong>
-          </li>
-        ))}
-      </ul>
+      <NewNote />
+      <Notes />
     </div>
   );
-}
+};
 
 export default App;
