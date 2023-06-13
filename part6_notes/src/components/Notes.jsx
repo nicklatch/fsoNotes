@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleImportanceOf } from '../reducers/noteReducer';
 
@@ -23,15 +24,13 @@ const Notes = () => {
 
   return (
     <ul>
-      {notes.map((note) => {
-        return (
-          <Note
-            key={note.id}
-            note={note}
-            handleClick={() => dispatch(toggleImportanceOf(note.id))}
-          />
-        );
-      })}
+      {notes.map((note) => (
+        <Note
+          key={note.id}
+          note={note}
+          handleClick={() => dispatch(toggleImportanceOf(note.id))}
+        />
+      ))}
     </ul>
   );
 };
