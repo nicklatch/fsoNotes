@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useQueryClient, useMutation, useQuery } from 'react-query';
+import { getNotes, createNote, updateNote } from './requests';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const queryClient = useQueryClient();
+
+  const newNoteMutation = useMutation(createNote, {
+    onSuccess: () => {
+      const notes = queryClient.getQueryData('notes');
+      queryClient.setQueryData('notes', notes.concat(newNote));
+    },
+  });
+
+  const updatedNoteMutation = useMutation(updateNote, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('notes');
+    },
+  });
+
+  // TODO: left off at 'Optimizing the performance'
+
+  const addNote = async (event) => {
+    event.preventDefault();
+    const content = event.target.note.value;
+    event.target.note.value = '';
+    newNoteMutation.mutate({ content, important: true });
+  };
+
+  const toggleImportance = (note) => {
+    updatedNoteMutation.mutate({ ...note, important: !note.important });
+  };
+
+  const result = useQuery('notes', getNotes);
+
+  if (result.isLoading) {
+    return <div>loading data...</div>;
+  }
+
+  const notes = result.data;
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div>
+      <h2>Notes app</h2>
+      <form onSubmit={addNote}>
+        <input name='note' />
+        <button type='submit'>add</button>
+      </form>
+      {notes.map((note) => (
+        <li key={note.id} onClick={() => toggleImportance(note)}>
+          {note.content}
+          <strong> {note.important ? 'important' : ''}</strong>
+        </li>
+      ))}
+    </div>
+  );
+};
 
-export default App
+export default App;
