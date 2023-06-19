@@ -17,8 +17,6 @@ const App = () => {
     },
   });
 
-  // TODO: left off at 'Optimizing the performance'
-
   const addNote = async (event) => {
     event.preventDefault();
     const content = event.target.note.value;
@@ -30,7 +28,9 @@ const App = () => {
     updatedNoteMutation.mutate({ ...note, important: !note.important });
   };
 
-  const result = useQuery('notes', getNotes);
+  const result = useQuery('notes', getNotes, {
+    refetchOnWindowFocus: false,
+  });
 
   if (result.isLoading) {
     return <div>loading data...</div>;
