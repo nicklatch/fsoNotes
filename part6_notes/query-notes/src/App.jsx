@@ -5,7 +5,7 @@ const App = () => {
   const queryClient = useQueryClient();
 
   const newNoteMutation = useMutation(createNote, {
-    onSuccess: () => {
+    onSuccess: (newNote) => {
       const notes = queryClient.getQueryData('notes');
       queryClient.setQueryData('notes', notes.concat(newNote));
     },
@@ -42,8 +42,8 @@ const App = () => {
     <div>
       <h2>Notes app</h2>
       <form onSubmit={addNote}>
-        <input name='note' />
-        <button type='submit'>add</button>
+        <input name="note" />
+        <button type="submit">add</button>
       </form>
       {notes.map((note) => (
         <li key={note.id} onClick={() => toggleImportance(note)}>
